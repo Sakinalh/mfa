@@ -1,4 +1,4 @@
-# Welcome to Henri Pottier Boutique 👋
+# Welcome to Henri Potier Boutique 👋
 ![Version](https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000)
 [![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)]()
 
