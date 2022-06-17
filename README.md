@@ -24,6 +24,7 @@ container: remote app, containing all remotes app.
 Go to all app folder and run:
 1. yarn install
 2. yarn start
+3. Visit http://localhost:8080
 ```
 
 ## Author
