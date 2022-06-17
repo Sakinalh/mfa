@@ -7,6 +7,15 @@
 
 ### ✨ [Demo](http://localhost:8080/)
 
+## Architecture
+
+The app is made with React, typescript and micro-frontend architecture using webpack's plugin ModuleFederationPlugin splited in 4 folders (app):
+
+storeApp : contains the store shared with all remotes apps
+productApp: remote app, handling book display
+hearApp: remote app
+container: remote app, containing all remotes app.
+
 ## Installation & Usage
 
 ```sh
