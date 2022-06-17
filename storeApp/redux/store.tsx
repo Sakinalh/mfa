@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from "react";
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
-import productsReducer, {setProducts} from './productsSlice';
-import cartReducer, {addToCart} from './cartSlice';
+import productsReducer, {setProducts, setSearchParam} from './productsSlice';
+import cartReducer, {addToCart, removeFromCart} from './cartSlice';
 
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import {useGetBooksQuery, useGetOffersQuery} from './hooksApi';
@@ -37,6 +37,8 @@ export function useStore(){
     useGetOffersQuery,
     cart,
     addToCart: (items: Book[]) => dispatch(addToCart(items)),
+    removeFromCart: (items: Book[]) => dispatch(removeFromCart(items)),
+    setSearchParam: (searchParam: string) => dispatch(setSearchParam(searchParam))
    }
 }
 

@@ -6,7 +6,6 @@ import { StoreProvider, store,useStore } from "store/StoreApp";
 import {Routes, Route, BrowserRouter} from 'react-router-dom';
 import Header from "../components/HeaderApp";
 import ProductsApp from '../components/ProductsApp';
-import Basket from '../components/Basket';
 
 export default () => {  
 

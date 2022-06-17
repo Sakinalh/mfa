@@ -15,9 +15,12 @@ export const userSlice = createSlice({
     reducers: {
         addToCart: (state: CartState, action: PayloadAction<Book[]>)  => {
             state.cart = action.payload;
+        },
+        removeFromCart:  (state: CartState, action: PayloadAction<Book[]>)  => {
+            state.cart = action.payload;
         }
     }
 });
 
-export const { addToCart } = userSlice.actions;
+export const { addToCart, removeFromCart } = userSlice.actions;
 export default userSlice.reducer;

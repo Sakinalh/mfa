@@ -8,7 +8,6 @@ export const  App = () => {
     return (
         <BrowserRouter>
           <StoreProvider store={store}>
-
             <ProductList />
             </StoreProvider>
         </BrowserRouter>

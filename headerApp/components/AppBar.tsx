@@ -5,16 +5,24 @@ import { IconButton, Badge } from '@mui/material';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate, Link} from 'react-router-dom';
-import SearchIcon from '@mui/icons-material/Search';
-import InputBase from '@mui/material/InputBase';
 import TextField from '@mui/material/TextField';
-import { StoreProvider, store, useStore } from "store/StoreApp";
-import { Toolbar, Button, Typography } from '@mui/material';
-import CustomAutocomplete from '../components/AutoComplete';
+import { useStore } from "store/StoreApp";
+import { Toolbar, Typography } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
+import CartModal from './CartModal';
 
 export const CustomAppBar = () =>  {
-    const { books, setProducts, useGetBooksQuery,addToCart, cart } = useStore();
+    const { books, setSearchParam, cart, removeFromCart } = useStore();
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+    const open = Boolean(anchorEl);
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
 
     const {cart: cartItems} = cart;
 
@@ -26,13 +34,12 @@ export const CustomAppBar = () =>  {
 
     const countTotalItems = () => {
         let total: number = 0;
-        cartItems.forEach((item: typeof Book) => total = total + item.qty);
+        (cartItems && cartItems.length > 0) ? cartItems.forEach((item: typeof Book) => total = total + item.qty) : 0;
         return total;
     }
 
     useEffect(() => {
         if(cart){
-            
             setTotalCartIem(countTotalItems())
         }
      });
@@ -42,12 +49,12 @@ export const CustomAppBar = () =>  {
     }
 
     const onSearchValueChange = (e: React.SyntheticEvent, value: any, reason: string) => {
+        const searchParam = typeof value === 'string' ? value : value.label.toLowerCase();
+        setSearchParam(searchParam);
+    }
 
-        const results = books.products.filter((book: typeof Book) => book.title.includes(value));
-     
-        // it is supposed to re render ProductList with filtered books    
-        setProducts(results);
-
+    const deleteProductFormCart = (books: typeof Book[] )=> {
+        removeFromCart(books)
     }
 
     return (
@@ -56,24 +63,30 @@ export const CustomAppBar = () =>  {
 
         <Toolbar>
             <IconButton onClick={() => onNavigate('products')} edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-            <MenuBookIcon />
-                </IconButton>
-            <Badge sx={{marginRight: 5}} onClick={() => onNavigate('basket')}  badgeContent={totalCartIem} color="secondary">
-                <ShoppingCartIcon />
-            </Badge>
+                <MenuBookIcon />
+            </IconButton>
+           
            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Henri Potier Boutique
            </Typography>
            <Autocomplete
                 disablePortal
                 id="combo-box-demo"
-                onInputChange={onSearchValueChange}     
+                onInputChange={onSearchValueChange} 
+                onChange={onSearchValueChange}    
                 options={convertedBook()}
-                sx={{ width: 300 }}
+                sx={{ width: 300, marginRight: 50 }}
                 renderInput={(book) => <TextField {...book} placeholder="Rechercher" />}
             /> 
 
-          <Button color="inherit">Login</Button>
+
+            <Badge sx={{marginRight: 5}} onClick={handleClick}  badgeContent={totalCartIem} color="secondary">
+                <ShoppingCartIcon  />
+
+            </Badge>
+
+            <CartModal open={open} onClose={handleClose} anchorEl={anchorEl} products={cartItems} deleteProduct={deleteProductFormCart}/>
+
         </Toolbar>
         </AppBar>
     )

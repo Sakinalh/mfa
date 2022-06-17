@@ -7,10 +7,13 @@ const packageJson = require('../package.json')
 const devConfig = {
     mode: 'development',
     devServer: {
-        port: 8081
+        port: 8081,
+        headers:{
+            "Access-Control-Allow-Origin": "*"
+        } 
     },
     output: {
-        filename: '[name].js'
+        filename: '[name].js',
     },
     plugins: [
         new HtmlWebpackPlugin({template: './public/index.html'}),

@@ -2,11 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Book } from '../models/Product';
 
 export interface ProductState {
-  products: Book[]
+  products: Book[];
+  searchParam: string | null;
 }
 
 const initialState: ProductState = {
     products: [],
+    searchParam: null,
 }
 
 
@@ -15,12 +17,14 @@ export const productsSlice = createSlice({
   initialState,
   reducers: {
     setProducts: (state: ProductState, action: PayloadAction<Book[]>) => {
-      console.log('set product', action)
       state.products = action.payload
+    },
+    setSearchParam: (state: ProductState, action: PayloadAction<string>) => {
+      state.searchParam = action.payload
     },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setProducts } = productsSlice.actions;
+export const { setProducts, setSearchParam } = productsSlice.actions;
 export default productsSlice.reducer;
