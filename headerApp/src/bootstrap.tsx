@@ -3,11 +3,6 @@ import App from './App';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
-// const mount = (el: HTMLElement) => {
-//     const root = createRoot(el!);
-//     root.render(<App />);
-// }
-
 const mount = (el: HTMLElement) => {
     const root = createRoot(el!);
     root.render(<BrowserRouter><App /></BrowserRouter>);

@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react'
+import * as React from 'react';
+import { useEffect, useRef } from 'react'
 import {mount} from 'products/ProductsApp';
 
 export default function ProductsApp() {

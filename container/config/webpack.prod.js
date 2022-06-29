@@ -3,20 +3,23 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const commonConfig = require('./webpack.common');
 const packageJson = require('../package.json');
 
+const domain = process.env.PRODUCTION_DOMAIN;
 
 const prodConfig = {
     mode: 'production',
     output: {
         filename: '[name].[contenthash].js'
     },
-    plugins: [{
-        name: 'container',
-        remotes: {
-            basket: 'basket@http://localhost:',
-            product: 'product@http://localhost:8085/remoteEntry.js',
-            header: 'header@http://localhost:',
-            store: 'store@http://localhost:8085/remoteEntry.js',
-        }
-
-    }]
+    plugins: [
+        new ModuleFederationPlugin({
+            name: 'container',
+            remotes: {
+                product: `product@${domain}/products/remoteEntry.js`,
+                header: `header@${domain}/header/remoteEntry.js`,
+                store: `store@${domain}/store/remoteEntry.js`,
+            },
+            shared: packageJson.dependencies
+    })]
 }
+
+module.exports = merge(commonConfig, prodConfig);

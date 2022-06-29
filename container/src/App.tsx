@@ -8,15 +8,12 @@ import Header from "../components/HeaderApp";
 import ProductsApp from '../components/ProductsApp';
 
 export default () => {  
-
-
     return (
             <Container maxWidth="xl" disableGutters>
                 <CssBaseline />
                 <Header />
                 <Outlet />
             </Container>
-            
-           
+                      
         )
 }
