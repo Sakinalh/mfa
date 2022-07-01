@@ -10,7 +10,7 @@ const prodConfig = {
     mode: 'production',
     output: {
         filename: '[name].[contenthash].js',
-        publicPath: '/products/lastest/'
+        publicPath: '/products/latest/'
     },
     plugins: [
         new HtmlWebpackPlugin({template: './public/index.html'}),
