@@ -8,7 +8,6 @@ import { SharedBrowserRouter } from './router';
 const rootElem = document.querySelector('#_root_container');
 const root = createRoot(rootElem!);
 
-
 root.render(
     <BrowserRouter>
         <Routes>
