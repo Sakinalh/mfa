@@ -15,7 +15,7 @@ const prodConfig = {
         new ModuleFederationPlugin({
             name: 'container',
             remotes: {
-                product: `product@${domain}/products/remoteEntry.js`,
+                products: `products@${domain}/products/remoteEntry.js`,
                 header: `header@${domain}/header/remoteEntry.js`,
                 store: `store@${domain}/store/remoteEntry.js`,
             },
