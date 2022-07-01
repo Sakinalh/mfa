@@ -35,7 +35,7 @@ export default function ProductList() {
     }, [data])
 
     useEffect(() => {
-        books && books.products && setBookToDisplay(books.products.filter((book: typeof Book)=> book.title.toLowerCase().includes(books.searchParam)));
+        books?.products && setBookToDisplay(books.products.filter((book: typeof Book)=> book.title.toLowerCase().includes(books.searchParam)));
     }, [books.searchParam])
 
     return (
